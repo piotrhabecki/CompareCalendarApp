@@ -1,28 +1,91 @@
 import dayjs from "dayjs";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import GlobalContext from "../../context/GlobalContext";
+import { CalendarEvent } from "../models/dayEvent";
+import {AiFillExclamationCircle} from 'react-icons/ai'
 
 interface day {
   day: dayjs.Dayjs;
   rowIdx: number;
 }
 
-
-
 function Day(props: day) {
+  const {
+    setDaySelected,
+    setShowEventModal,
+    showEventModal,
+    dayEvents,
+    setSelectedDayEvents,
+    timeSpan,
+    setTimeSpan,
+  } = useContext(GlobalContext);
+
+  const [devents, setDEvents] = useState<CalendarEvent[]>([]);
+  const [highlightedEvents, setHighlightedEvents] = useState<CalendarEvent[]>(
+    []
+  );
+
+  useEffect(() => {
+    const format = "DD-MM-YY";
+
+    const evts = Object.values(dayEvents).filter(
+      (evt) => dayjs(evt.day).format(format) === props.day.format(format)
+    );
+
+    setDEvents(evts);
+  }, [dayEvents, props.day, setTimeSpan]);
+
+  useEffect(() => {
+    const tempHEvents: CalendarEvent[] = [];
+    devents.forEach((evt) => {
+      if (evt.timeDelta >= timeSpan) {
+        tempHEvents.push(evt);
+      }
+    });
+    setHighlightedEvents(tempHEvents);
+  }, [devents, timeSpan]);
 
   const getCurrentDayClass = () => {
-    return props.day.format("DD-MM-YY") === dayjs().format("DD-MM-YY") ? 'bg-blue-600 text-white rounded-full w-7' : "";
-  }
+    return props.day.format("DD-MM-YY") === dayjs().format("DD-MM-YY")
+      ? "bg-blue-600 text-white rounded-full w-7"
+      : "";
+  };
 
-  const displayDay = <p className="text-sm mt-1">{props.day.format('ddd').toUpperCase()}</p>
+  const clickOnDayHandler = () => {
+    setDaySelected(props.day);
+    setShowEventModal(!showEventModal);
+  };
+
+  const displayDay = (
+    <p className="text-sm mt-1">{props.day.format("ddd").toUpperCase()}</p>
+  );
 
   return (
     <div className="border border-gray-200 flex flex-col">
       <header className="flex flex-col items-center">
         {props.rowIdx === 0 && displayDay}
-        
-        <p className={`text-sm p-1 my-1 text-center ${getCurrentDayClass()}`}>{props.day.format("DD")}</p>
+
+        <p className={`text-sm p-1 my-1 text-center ${getCurrentDayClass()}`}>
+          {props.day.format("DD")}
+        </p>
       </header>
+      <div className="flex-1 cursor-pointer" onClick={clickOnDayHandler}>
+        {devents.map((evt, i) => (
+          <div
+            key={i}
+            className={`bg-${
+              highlightedEvents.indexOf(evt) > -1 ? "yellow" : evt.label
+            }-200 p1 mr-3 text-gray-600 text-sm rounded mb-1 truncate text-center`}
+            onClick={() => {
+              setSelectedDayEvents(evt);
+            }}
+          >
+            {dayjs(evt.timeStart).format("HH:mm")} -{" "}
+            {dayjs(evt.timeEnd).format("HH:mm")}
+            <p>{evt.timeDelta} minutes {highlightedEvents.indexOf(evt) > -1 ? <AiFillExclamationCircle /> : null}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

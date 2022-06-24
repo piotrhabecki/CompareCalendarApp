@@ -2,8 +2,6 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import CallendarApp from "../src/components/CallendarApp/CallendarApp";
 
-import { getMonth } from "../src/utilities/utils";
-
 const Home: NextPage = () => {
   return (
     <div>
