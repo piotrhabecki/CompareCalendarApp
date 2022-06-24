@@ -17,7 +17,9 @@ interface GlobalContext {
     selectedDayEvent: CalendarEvent,
     setSelectedDayEvents: (dayEvents: CalendarEvent) => void,
     timeSpan: number,
-    setTimeSpan: (timeSpan: number) => void
+    setTimeSpan: (timeSpan: number) => void,
+    showTrainingModal: boolean,
+    setShowTrainingModal: (show: boolean) => void,
     
 }
 
@@ -35,7 +37,9 @@ const GlobalContext = React.createContext<GlobalContext>({
     selectedDayEvent: new CalendarEvent("", dayjs(), dayjs(), 0, "", 0),
     setSelectedDayEvents: (dayEvent: CalendarEvent) => {},
     timeSpan: 10000,
-    setTimeSpan: (timeSpan: number) => {}
+    setTimeSpan: (timeSpan: number) => {},
+    showTrainingModal: false,
+    setShowTrainingModal: (show: boolean) => {}
 });
 
 export default GlobalContext;

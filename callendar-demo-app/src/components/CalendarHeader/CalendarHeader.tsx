@@ -8,7 +8,8 @@ import LOGO from "../../../assets/LOGO.png";
 import GlobalContext from "../../context/GlobalContext";
 
 function CalendarHeader() {
-  const { monthIndex, setMonthIndex } = useContext(GlobalContext);
+  const { monthIndex, setMonthIndex, setShowTrainingModal, showTrainingModal } =
+    useContext(GlobalContext);
 
   const handlePrevMonth = () => {
     setMonthIndex(Number(monthIndex) - 1);
@@ -24,6 +25,10 @@ function CalendarHeader() {
     );
   };
 
+  const handleShowTrainingModal = () => {
+    setShowTrainingModal(!showTrainingModal);
+  };
+
   return (
     <header className="px-4 py-2 flex items-center">
       <div className="mr-2 w-12 h12">
@@ -33,6 +38,12 @@ function CalendarHeader() {
       <h1 className="mr-10 text-xl text-gray-500 font-bold">Calendar</h1>
       <button className="border rounded py-2 px-4 mr-5" onClick={handleReset}>
         Today
+      </button>
+      <button
+        className="border rounded py-2 px-4 mr-5"
+        onClick={handleShowTrainingModal}
+      >
+        How to
       </button>
       <button>
         <span className="cursor-pointer text-gray-600 mx-2">
@@ -44,6 +55,7 @@ function CalendarHeader() {
           {<BsChevronRight onClick={handleNextMonth} />}
         </span>
       </button>
+
       <h2 className="ml-4 text-xl text-gray-500 font-bold">
         {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")}
       </h2>

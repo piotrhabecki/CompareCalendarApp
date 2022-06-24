@@ -14,6 +14,7 @@ function ContextWrapper(props: any) {
     new CalendarEvent("", dayjs(), dayjs(), 0, "", 0)
   );
   const [timeSpan, setTimeSpan] = useState<number>(1000)
+  const [showTrainingModal, setShowTrainingModal] = useState(false)
 
   return (
     <GlobalContext.Provider
@@ -25,6 +26,8 @@ function ContextWrapper(props: any) {
         dayEvents,
         selectedDayEvent,
         timeSpan,
+        showTrainingModal,
+        setShowTrainingModal,
         setTimeSpan,
         setDayEvents,
         setShowEventModal,
