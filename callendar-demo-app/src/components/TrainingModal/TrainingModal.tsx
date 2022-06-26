@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import { Carousel } from "react-responsive-carousel";
 import GlobalContext from "../../context/GlobalContext";
 import image1 from "../../../assets/training/training.png";
 import image2 from "../../../assets/training/training2.png";
