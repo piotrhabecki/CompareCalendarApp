@@ -4,7 +4,7 @@ import React from "react";
 import { useContext } from "react";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs";
 
-import LOGO from "../../../assets/LOGO.png";
+import LOGO from "../../../assets/logo.png";
 import GlobalContext from "../../context/GlobalContext";
 
 function CalendarHeader() {
