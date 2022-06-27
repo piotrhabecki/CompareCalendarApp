@@ -2,7 +2,8 @@ import dayjs from "dayjs";
 import React, { useContext, useEffect, useState } from "react";
 import GlobalContext from "../../context/GlobalContext";
 import { CalendarEvent } from "../models/dayEvent";
-import {AiFillExclamationCircle} from 'react-icons/ai'
+import { AiFillExclamationCircle } from "react-icons/ai";
+import Event from "./event";
 
 interface day {
   day: dayjs.Dayjs;
@@ -71,19 +72,25 @@ function Day(props: day) {
       </header>
       <div className="flex-1 cursor-pointer" onClick={clickOnDayHandler}>
         {devents.map((evt, i) => (
-          <div
-            key={i}
-            className={`bg-${
-              highlightedEvents.indexOf(evt) > -1 ? "yellow" : evt.label
-            }-200 p1 mr-3 text-gray-600 text-sm rounded mb-1 truncate text-center`}
-            onClick={() => {
-              setSelectedDayEvents(evt);
-            }}
-          >
-            {dayjs(evt.timeStart).format("HH:mm")} -{" "}
-            {dayjs(evt.timeEnd).format("HH:mm")}
-            <p>{evt.timeDelta} minutes {highlightedEvents.indexOf(evt) > -1 ? <AiFillExclamationCircle /> : null}</p>
-          </div>
+          <>
+            {highlightedEvents.indexOf(evt) > -1 ? (
+              <Event
+                key={i}
+                cssClass={`bg-yellow-200 p1 mr-3 text-gray-600 text-sm rounded mb-1 truncate text-center`}
+                evt={evt}
+                onSelectedDayEvents={setSelectedDayEvents}
+                hasIcon={true}
+              />
+            ) : (
+              <Event
+                key={i}
+                cssClass={`bg-${evt.label}-200 p1 mr-3 text-gray-600 text-sm rounded mb-1 truncate text-center`}
+                evt={evt}
+                onSelectedDayEvents={setSelectedDayEvents}
+                hasIcon={false}
+              />
+            )}
+          </>
         ))}
       </div>
     </div>
