@@ -34,7 +34,7 @@ const GlobalContext = React.createContext<GlobalContext>({
     setShowEventModal: (show: boolean) => {},
     dayEvents: [],
     setDayEvents: (dayEvents: CalendarEvent[]) => {},
-    selectedDayEvent: new CalendarEvent("", dayjs(), dayjs(), 0, "", 0),
+    selectedDayEvent: new CalendarEvent("", dayjs(), dayjs(), 0, "", 0, ""),
     setSelectedDayEvents: (dayEvent: CalendarEvent) => {},
     timeSpan: 10000,
     setTimeSpan: (timeSpan: number) => {},
