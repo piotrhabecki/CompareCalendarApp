@@ -11,7 +11,7 @@ function ContextWrapper(props: any) {
   const [showEventModal, setShowEventModal] = useState(false);
   const [dayEvents, setDayEvents] = useState<CalendarEvent[]>([]);
   const [selectedDayEvent, setSelectedDayEvents] = useState<CalendarEvent>(
-    new CalendarEvent("", dayjs(), dayjs(), 0, "", 0)
+    new CalendarEvent("", dayjs(), dayjs(), 0, "", 0, "")
   );
   const [timeSpan, setTimeSpan] = useState<number>(1000)
   const [showTrainingModal, setShowTrainingModal] = useState(false)
