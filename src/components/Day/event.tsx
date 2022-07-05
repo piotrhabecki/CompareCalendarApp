@@ -20,6 +20,7 @@ const Event = (props: event) => {
           props.onSelectedDayEvents(props.evt);
         }}
       >
+        <p>{props.evt.title}</p>
         {dayjs(props.evt.timeStart).format("HH:mm")} -{" "}
         {dayjs(props.evt.timeEnd).format("HH:mm")}
         <p>{props.evt.timeDelta} minutes {props.hasIcon  ? <AiFillExclamationCircle /> : null}</p>

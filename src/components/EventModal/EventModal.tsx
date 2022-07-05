@@ -43,6 +43,8 @@ const EventModal = () => {
       : dayjs(new Date(Date.now())).format("HH:mm")
   );
 
+  const [title, setTitle] = useState("")
+
   const [selectedLabel, setSelectedLabel] = useState(
     selectedDayEvent.day > 0 ? selectedDayEvent.label : LABEL_CLASSES[0]
   );
@@ -58,6 +60,10 @@ const EventModal = () => {
   const changeTimeEndHourHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setEndHour(event.target.value);
   };
+
+  const changeEventNameHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  }
 
   const checkCustomCalendarInPath = () => {
     if (router.pathname.indexOf("/calendars/") > -1) return true;
@@ -113,6 +119,7 @@ const EventModal = () => {
       timeDelta: timeEnd.diff(timeStart, "minutes"),
       label: selectedLabel,
       day: daySelected.valueOf(),
+      title: title
     };
   };
 
@@ -142,7 +149,7 @@ const EventModal = () => {
     console.log(data);
     const events = await getAllCalendarsEvents(customCalendar);
 
-    setSelectedDayEvents(new CalendarEvent("", dayjs(), dayjs(), 0, "", 0));
+    setSelectedDayEvents(new CalendarEvent("", dayjs(), dayjs(), 0, "", 0, ""));
     setShowEventModal(!showEventModal);
 
     events.length === 0 ? redirectToBegining() : setDayEvents(events);
@@ -202,7 +209,6 @@ const EventModal = () => {
     !isOnCustomCalendar && router.push(`/calendars/${customCalendar}`);
 
     setShowEventModal(!showEventModal);
-
   };
 
   return (
@@ -241,6 +247,16 @@ const EventModal = () => {
               <MdOutlineSchedule />
             </span>
             <p>{daySelected.format("dddd, MMMM DD")}</p>
+            <div>Title</div>
+            <input
+              type="string"
+              name="name of the event"
+              placeholder={"Give your name or name of the event"}
+              value={title}
+              required
+              onChange={changeEventNameHandler}
+              className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 focus:border-blue-500"
+            />
             <div>Time start</div>
             <input
               type="time"

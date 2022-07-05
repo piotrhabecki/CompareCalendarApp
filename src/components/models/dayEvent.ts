@@ -7,6 +7,7 @@ export class CalendarEvent {
   timeDelta: number;
   label: string;
   day: number;
+  title: string | null;
 
   constructor(
     id: string,
@@ -14,7 +15,8 @@ export class CalendarEvent {
     timeEnd: Dayjs,
     timeDelta: number,
     label: string,
-    day: number
+    day: number,
+    title: string | null
   ) {
     this.id = id;
     this.timeStart = timeStart;
@@ -22,6 +24,7 @@ export class CalendarEvent {
     this.timeDelta = timeDelta;
     this.label = label;
     this.day = day;
+    this.title = title;
   }
 }
 
