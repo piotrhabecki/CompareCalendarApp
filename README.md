@@ -14,7 +14,8 @@ The application is using MongoDB NoSQL database to store events. You can share t
 
 The application is created with React and styled with Tailwindcss.
 
-This is the weather app you need. It's only for showcase purposes.
+This app it's only for showcase purposes.
+
 ## Live demo and manual
 <div align="center">
 
