@@ -37,6 +37,9 @@ If you want to run the code you just have to:
 
 * Checkout the repository
 * npm install
+* create account on MongoDb
+* Get the API key for your cluster
+* Update project settings
 * npm run dev
 
 ## About the author
